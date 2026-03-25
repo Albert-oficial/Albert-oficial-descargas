@@ -22,6 +22,13 @@ color:#fff;
 100%{color:red;}
 }
 
+/* BORDE RGB */
+@keyframes rgbBorder{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
 /* HEADER */
 .header{text-align:center;padding:20px;}
 .header h1{animation:rgbText 5s infinite linear;}
@@ -35,13 +42,9 @@ border-radius:15px;
 padding:4px;
 background:linear-gradient(45deg, red, blue, white, magenta);
 background-size:300% 300%;
-animation:bordeRGB 4s linear infinite;
+animation:rgbBorder 4s linear infinite;
 }
-@keyframes bordeRGB{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
+
 .creador p{
 animation:rgbText 5s infinite linear;
 font-weight:bold;
@@ -96,7 +99,7 @@ background:#ff3333;
 box-shadow:0 0 15px red;
 }
 
-/* LOGIN MODAL */
+/* LOGIN */
 #loginModal{
 display:none;
 position:fixed;
@@ -110,56 +113,75 @@ align-items:center;
 }
 
 .login-box{
-background:#111;
-padding:20px;
-border-radius:15px;
+background:#0a0a0a;
+padding:25px;
+border-radius:20px;
 text-align:center;
-width:80%;
-max-width:300px;
-border:2px solid;
-animation:rgbBorder 4s infinite linear;
+width:85%;
+max-width:320px;
 }
 
-.login-box h3{
-animation:rgbText 5s infinite linear;
-}
-
-.login-box input{
-width:90%;
-padding:10px;
-margin-top:10px;
-border-radius:10px;
-border:none;
-background:#000;
-color:#fff;
-text-align:center;
-}
-
-/* INPUTS PRO */
+/* INPUT RGB */
 .input-box{
 position:relative;
 margin-top:15px;
-padding:2px;
-border-radius:12px;
+border-radius:15px;
+overflow:hidden;
+}
+
+.input-box::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
 background:linear-gradient(45deg, red, blue, white, magenta, red);
-background-size:300% 300%;
-animation:rgbBorder 4s linear infinite;
+background-size:400% 400%;
+animation:rgbBorder 3s linear infinite;
+}
+
+.input-box::after{
+content:"";
+position:absolute;
+top:2px;
+left:2px;
+right:2px;
+bottom:2px;
+background:#000;
+border-radius:13px;
 }
 
 .input-box input{
+position:relative;
+z-index:2;
 width:100%;
-padding:12px;
-border-radius:10px;
+padding:14px;
 border:none;
-background:#000;
+background:transparent;
 color:#fff;
 outline:none;
+box-sizing:border-box;
+text-align:center;
+letter-spacing:2px;
 }
 
-@keyframes rgbBorder{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+/* EFECTO FOCUS */
+.input-box input:focus{
+box-shadow:0 0 10px red, 0 0 20px blue, 0 0 30px magenta;
+}
+
+/* ERROR SHAKE */
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-5px);}
+50%{transform:translateX(5px);}
+75%{transform:translateX(-5px);}
+100%{transform:translateX(0);}
+}
+
+.error{
+animation:shake 0.3s;
 }
 
 /* PANEL ADMIN */
@@ -171,9 +193,46 @@ left:0;
 width:100%;
 height:100%;
 background:#000;
-padding:20px;
-overflow:auto;
+display:flex;
+justify-content:center;
+align-items:center;
 }
+
+.admin-box{
+width:90%;
+max-width:400px;
+background:#0a0a0a;
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 25px red;
+}
+
+/* ALERTA */
+.alerta{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#0a0a0a;
+padding:15px 25px;
+border-radius:15px;
+display:none;
+box-shadow:0 0 20px red;
+border:2px solid transparent;
+background-image:linear-gradient(#0a0a0a,#0a0a0a), 
+linear-gradient(45deg, red, blue, magenta);
+background-origin:border-box;
+background-clip:padding-box, border-box;
+animation:rgbBorder 3s linear infinite;
+z-index:999;
+}
+
+.alerta p{
+margin:0;
+font-weight:bold;
+}
+
+/* ANIMACIÓN */
 </style>
 </head>
 
@@ -192,13 +251,17 @@ overflow:auto;
 
 <div class="container" id="lista"></div>
 
-<div class="btn" onclick="abrirLogin()">ACESSO ADMIN</div>
+<div class="btn" onclick="abrirLogin()">🔐 ADMIN</div>
 
 <!-- LOGIN -->
 <div id="loginModal">
 <div class="login-box">
 <h3>🔐 Acceso Admin</h3>
+
+<div class="input-box">
 <input type="password" id="clave" placeholder="Ingresa clave">
+</div>
+
 <div class="btn" onclick="verificar()">ENTRAR</div>
 <div class="btn" onclick="cerrarLogin()">CANCELAR</div>
 </div>
@@ -206,6 +269,8 @@ overflow:auto;
 
 <!-- PANEL ADMIN -->
 <div id="adminPanel">
+<div class="admin-box">
+
 <h2>ALBERT OFICIAL</h2>
 
 <div class="input-box">
@@ -223,7 +288,15 @@ overflow:auto;
 <div class="btn" onclick="agregar()">AGREGAR</div>
 <div class="btn" onclick="cerrar()">CERRAR</div>
 
+<h3>Archivos Subidos</h3>
 <div id="adminLista"></div>
+
+</div>
+</div>
+
+<!-- ALERTA -->
+<div id="alerta" class="alerta">
+<p id="alertaTexto"></p>
 </div>
 
 <script>
@@ -273,13 +346,32 @@ document.getElementById("loginModal").style.display="none";
 }
 
 function verificar(){
-let pass=document.getElementById("clave").value;
-if(pass==="2927"){
+let pass=document.getElementById("clave");
+
+if(pass.value==="2927"){
 cerrarLogin();
-document.getElementById("adminPanel").style.display="block";
+document.getElementById("adminPanel").style.display="flex";
+adminRender();
 }else{
-alert("Clave incorrecta");
+mostrarAlerta("❌ Clave incorrecta");
+
+// EFECTO SHAKE
+pass.classList.add("error");
+setTimeout(()=>{pass.classList.remove("error");},300);
 }
+}
+
+/* ALERTA */
+function mostrarAlerta(texto){
+let alerta=document.getElementById("alerta");
+let textoBox=document.getElementById("alertaTexto");
+
+textoBox.innerText=texto;
+alerta.style.display="block";
+
+setTimeout(()=>{
+alerta.style.display="none";
+},3000);
 }
 
 /* ADMIN */
@@ -291,6 +383,29 @@ let img=imagen.value;
 archivos.push({nombre:n,link:l,imagen:img});
 localStorage.setItem("archivos",JSON.stringify(archivos));
 render();
+adminRender();
+}
+
+function eliminar(index){
+if(confirm("¿Eliminar este archivo?")){
+archivos.splice(index,1);
+localStorage.setItem("archivos",JSON.stringify(archivos));
+render();
+adminRender();
+}
+}
+
+function adminRender(){
+let html="";
+archivos.forEach((a,i)=>{
+html+=`
+<div class="card">
+<h3>${a.nombre}</h3>
+<div class="btn" onclick="eliminar(${i})">🗑️ ELIMINAR</div>
+</div>
+`;
+});
+document.getElementById("adminLista").innerHTML=html;
 }
 
 function cerrar(){
