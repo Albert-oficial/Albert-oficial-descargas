@@ -171,15 +171,20 @@ descargas:0
 }
 ];
 
-/* LIMPIAR BUG ANTERIOR */
-localStorage.removeItem("archivos");
+/* CARGAR O CREAR */
+let archivos = JSON.parse(localStorage.getItem("archivos"));
 
-let archivos = baseArchivos;
+if(!archivos){
+archivos = baseArchivos;
+guardar();
+}
 
+/* GUARDAR */
 function guardar(){
 localStorage.setItem("archivos", JSON.stringify(archivos));
 }
 
+/* RENDER */
 function render(lista = archivos){
 let html="";
 lista.forEach((a)=>{
@@ -188,7 +193,7 @@ html+=`
 <div class="img-rgb"><img src="${a.imagen}"></div>
 <h2 class="nombre-rgb">${a.nombre}</h2>
 <div class="fecha">📅 ${a.fecha}</div>
-<div class="contador">⬇️ ${a.descargas} descargas</div>
+<div class="contador">⬇️ ${a.descargas || 0} descargas</div>
 <div class="btn" onclick="descargar('${a.id}')">DESCARGAR</div>
 </div>`;
 });
@@ -196,17 +201,22 @@ document.getElementById("lista").innerHTML = html;
 }
 render();
 
-/* DESCARGA CORRECTA */
+/* DESCARGAR + CONTADOR */
 function descargar(id){
 let archivo = archivos.find(a => a.id === id);
+
 if(archivo){
-archivo.descargas++;
+archivo.descargas = (archivo.descargas || 0) + 1;
 guardar();
 render();
+
+setTimeout(()=>{
 window.location.href = archivo.link;
+},300);
 }
 }
 
+/* BUSCAR */
 function buscar(text){
 let filtrados = archivos.filter(a =>
 a.nombre.toLowerCase().includes(text.toLowerCase())
