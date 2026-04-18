@@ -15,14 +15,11 @@ color:#fff;
 overflow-x:hidden;
 }
 
-/* ANIMACIONES RGB SUAVES */
+/* RGB SUAVE (OPTIMIZADO) */
 @keyframes rgbText{
-0%{color:#ff0000;}
-20%{color:#ff00ff;}
-40%{color:#00ffff;}
-60%{color:#00ff00;}
-80%{color:#ffff00;}
-100%{color:#ff0000;}
+0%{color:#00ffcc;}
+50%{color:#00aaff;}
+100%{color:#00ffcc;}
 }
 
 @keyframes rgbBorder{
@@ -31,120 +28,121 @@ overflow-x:hidden;
 100%{background-position:0% 50%;}
 }
 
-/* METEORITOS */
-.meteor{
-position:fixed;
-top:-100px;
-width:2px;
-height:120px;
-background:linear-gradient(white, rgba(255,255,255,0));
-opacity:0.9;
-filter:blur(1px);
-transform:rotate(45deg);
-animation:meteorFall linear infinite;
+/* HEADER */
+.header{
+text-align:center;
+padding:15px;
+font-size:18px;
+font-weight:bold;
+animation:rgbText 6s linear infinite;
 }
 
-.meteor::before{
-content:"";
-position:absolute;
-top:0;
-left:-2px;
-width:6px;
-height:6px;
-background:white;
-border-radius:50%;
-box-shadow:0 0 10px white, 0 0 20px white;
+/* CREADOR */
+.creador{
+text-align:center;
+margin:10px;
 }
 
-@keyframes meteorFall{
-0%{transform:translate(0,0) rotate(45deg);opacity:0;}
-10%{opacity:1;}
-100%{transform:translate(300px,120vh) rotate(45deg);opacity:0;}
-}
-
-.header{text-align:center;padding:20px;}
-.header h1{
-animation:rgbText 8s infinite linear;
-}
-
-.creador{text-align:center;margin:20px;}
 .creador img{
-width:90%;
-max-width:400px;
-border-radius:15px;
-padding:4px;
-background:linear-gradient(45deg, red, magenta, cyan, lime, yellow);
-background-size:400% 400%;
-animation:rgbBorder 6s linear infinite;
+width:85%;
+max-width:300px;
+border-radius:12px;
+padding:2px;
+background:linear-gradient(45deg,#00ffcc,#00aaff,#00ffcc);
+background-size:300% 300%;
+animation:rgbBorder 8s linear infinite;
 }
 
 .creador p{
-animation:rgbText 8s infinite linear;
-font-weight:bold;
+font-size:13px;
+margin-top:6px;
+animation:rgbText 6s linear infinite;
 }
 
+/* BUSCADOR */
 .search{
-padding:12px;
+padding:10px;
 width:90%;
 margin:10px auto;
 display:block;
-border-radius:10px;
+border-radius:8px;
 border:none;
 background:#111;
 color:#fff;
-font-size:16px;
+font-size:14px;
 }
 
-.container{padding:15px;}
+/* CONTENEDOR */
+.container{
+padding:10px;
+max-width:500px;
+margin:auto;
+}
 
+/* CARD */
 .card{
 background:#111;
-padding:15px;
-border-radius:15px;
-margin-bottom:15px;
-box-shadow:0 0 15px #ff00ff;
+padding:12px;
+border-radius:12px;
+margin-bottom:12px;
+box-shadow:0 0 8px rgba(0,255,200,0.3);
 transition:0.3s;
 }
+
 .card:hover{
-transform:scale(1.03);
-box-shadow:0 0 35px #00ffff;
+transform:scale(1.01);
+box-shadow:0 0 15px rgba(0,255,200,0.6);
 }
 
+/* IMAGEN */
 .img-rgb{
-padding:4px;
+padding:2px;
 border-radius:10px;
-background:linear-gradient(45deg, red, magenta, cyan, lime, yellow);
-background-size:400% 400%;
-animation:rgbBorder 6s linear infinite;
-margin-bottom:10px;
+background:linear-gradient(45deg,#00ffcc,#00aaff,#00ffcc);
+background-size:300% 300%;
+animation:rgbBorder 8s linear infinite;
+margin-bottom:8px;
 }
+
 .img-rgb img{
 width:100%;
 border-radius:8px;
 }
 
+/* TEXTO */
 .nombre-rgb{
-animation:rgbText 8s infinite linear;
+font-size:15px;
 text-align:center;
+margin-bottom:4px;
+animation:rgbText 6s linear infinite;
 }
 
 .fecha{
 text-align:center;
-font-size:14px;
-animation:rgbText 10s infinite linear;
+font-size:12px;
+opacity:0.7;
+margin-bottom:6px;
 }
 
+/* BOTON */
 .btn{
-padding:12px;
-margin-top:10px;
+padding:10px;
 text-align:center;
-border-radius:10px;
+border-radius:8px;
 cursor:pointer;
 font-weight:bold;
-background:linear-gradient(45deg, red, magenta, cyan, lime, yellow);
-background-size:400% 400%;
-animation:rgbBorder 6s linear infinite;
+font-size:13px;
+background:linear-gradient(45deg,#00ffcc,#00aaff,#00ffcc);
+background-size:300% 300%;
+animation:rgbBorder 8s linear infinite;
 color:#000;
+}
+
+/* RESPONSIVE */
+@media (max-width:600px){
+.header{font-size:16px;}
+.nombre-rgb{font-size:14px;}
+.btn{font-size:12px;}
 }
 </style>
 </head>
@@ -152,11 +150,11 @@ color:#000;
 <body>
 
 <div class="header">
-<h1>ZONA DE DESCARGA DE ALBERT OFICIAL</h1>
+ZONA DE DESCARGAS DE ALBERT OFICIAL
 </div>
 
 <div class="creador">
-<img src="https://i.imgur.com/jJwW8vt.jpeg">
+<img src="https://i.imgur.com/kKZMQZU.png">
 <p>ALBERT OFICIAL CREADOR</p>
 </div>
 
@@ -165,37 +163,20 @@ color:#000;
 
 <script>
 
-/* METEORITOS DINÁMICOS */
-function crearMeteoros(){
-for(let i=0;i<8;i++){
-const m = document.createElement("div");
-m.className = "meteor";
-m.style.left = Math.random()*100 + "%";
-m.style.animationDuration = (3 + Math.random()*4) + "s";
-m.style.animationDelay = (Math.random()*5) + "s";
-document.body.appendChild(m);
-}
-}
-crearMeteoros();
-
-/* ARCHIVOS (SIN LOCALSTORAGE, SIN BUG) */
 const archivos = [
 {
-id:"file1",
 nombre:"HOLOGRAMA PERSONAJES + TELEPOR INFINITO",
 link:"https://www.mediafire.com/file/rsczfussmk8hm1s/HOLOGRAMA_PERSONAJE_%252B_TELEPOR_INFINITO_%25F0%259F%2591%258C%25F0%259F%25A5%25B5.7z/file",
 imagen:"https://i.imgur.com/fxe6U0p.png",
 fecha:"03/04/2026"
 },
 {
-id:"file2",
 nombre:"HOLOGRAMA 90% PERSO + AIMBOT 80% CABEZ",
 link:"https://www.mediafire.com/file/63662esowdkfr5e/AIMBOT_80%2525_CABEZA_%252B_HOLOGRAMA_PERSONAJES_90%2525_FF_NORMAL_By_ALBERT_OFICIAL.7z/file",
 imagen:"https://i.imgur.com/WYEUKbK.png",
 fecha:"04/04/2026"
 },
 {
-id:"file3",
 nombre:"HOLOGRAMA AURORA AZUL",
 link:"https://www.mediafire.com/file/j28cfvj29h1yd4o/HOLOGRAMA_AZUL_AURORA_FF_MAX_By_ALBERT_OFICIAL_CREADOR.7z/file",
 imagen:"https://i.imgur.com/cSPurlN.png",
@@ -203,33 +184,21 @@ fecha:"05/04/2026"
 }
 ];
 
-/* RENDER */
 function render(lista = archivos){
-const contenedor = document.getElementById("lista");
 let html="";
-
 lista.forEach((a)=>{
 html+=`
 <div class="card">
-<div class="img-rgb"><img src="${a.imagen}" loading="lazy"></div>
-<h2 class="nombre-rgb">${a.nombre}</h2>
+<div class="img-rgb"><img src="${a.imagen}"></div>
+<div class="nombre-rgb">${a.nombre}</div>
 <div class="fecha">📅 ${a.fecha}</div>
-<div class="btn" onclick="descargar('${a.link}')">DESCARGAR</div>
+<div class="btn" onclick="window.open('${a.link}')">DESCARGAR</div>
 </div>`;
 });
-
-contenedor.innerHTML = html;
+document.getElementById("lista").innerHTML = html;
 }
 render();
 
-/* DESCARGAR */
-function descargar(link){
-setTimeout(()=>{
-window.open(link, "_blank");
-},200);
-}
-
-/* BUSCAR */
 function buscar(text){
 const filtrados = archivos.filter(a =>
 a.nombre.toLowerCase().includes(text.toLowerCase())
