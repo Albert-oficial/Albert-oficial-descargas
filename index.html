@@ -14,13 +14,13 @@ color:#fff;
 font-family:Arial;
 }
 
-/* ESCALA GLOBAL (CLAVE 🔥) */
+/* ESCALA AJUSTADA (ANTES 0.65) */
 .app{
-transform:scale(0.65);
+transform:scale(1.1);
 transform-origin:top center;
 }
 
-/* RGB MUY SUAVE */
+/* RGB SUAVE */
 @keyframes rgb{
 0%{color:#00ffcc;}
 50%{color:#00aaff;}
@@ -29,64 +29,64 @@ transform-origin:top center;
 
 /* CONTENEDOR */
 .container{
-max-width:260px;
+max-width:280px;
 margin:auto;
-padding:4px;
+padding:5px;
 }
 
 /* HEADER */
 .header{
 text-align:center;
-font-size:10px;
-padding:4px;
+font-size:11px;
+padding:5px;
 animation:rgb 8s linear infinite;
 }
 
 /* IMAGEN */
 .creador img{
-width:60%;
-max-width:120px;
+width:65%;
+max-width:140px;
 display:block;
-margin:4px auto;
-border-radius:6px;
+margin:5px auto;
+border-radius:7px;
 }
 
 /* CARD */
 .card{
 background:#111;
-padding:5px;
-border-radius:6px;
-margin-bottom:5px;
+padding:6px;
+border-radius:7px;
+margin-bottom:6px;
 }
 
 /* IMG */
 .card img{
 width:100%;
-border-radius:4px;
+border-radius:5px;
 }
 
 /* TEXTO */
 .nombre{
-font-size:8px;
+font-size:9px;
 text-align:center;
-margin:2px 0;
+margin:3px 0;
 }
 
 .fecha{
-font-size:7px;
+font-size:8px;
 text-align:center;
 opacity:0.6;
 }
 
 /* BOTON */
 .btn{
-margin-top:3px;
-padding:4px;
+margin-top:4px;
+padding:5px;
 text-align:center;
-font-size:8px;
+font-size:9px;
 background:#00ffaa;
 color:#000;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
 }
 </style>
@@ -137,7 +137,7 @@ html+=
 '<img src="'+archivos[i].imagen+'">'+
 '<div class="nombre">'+archivos[i].nombre+'</div>'+
 '<div class="fecha">'+archivos[i].fecha+'</div>'+
-'<div class="btn" onclick="window.open(\''+archivos[i].link+'\')">DESC</div>'+
+'<div class="btn" onclick="window.open(\''+archivos[i].link+'\')">Descargar</div>'+
 '</div>';
 }
 document.getElementById("lista").innerHTML=html;
