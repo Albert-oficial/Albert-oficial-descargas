@@ -3,133 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALBERT</title>
+<title>ZONA DE DESCARGA DE ALBERT OFICIAL</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{box-sizing:border-box;margin:0;padding:0;}
 
 body{
+font-family:Arial;
 background:#000;
 color:#fff;
-font-family:Arial;
 overflow-x:hidden;
 }
 
-/* ESCALA (NO TOCAR) */
-.app{
-transform:scale(1.1);
-transform-origin:top center;
-}
-
-/* RGB TEXTO */
+/* ANIMACIONES RGB SUAVES */
 @keyframes rgbText{
 0%{color:#ff0000;}
-25%{color:#ff00ff;}
-50%{color:#00ffff;}
-75%{color:#00ff00;}
+20%{color:#ff00ff;}
+40%{color:#00ffff;}
+60%{color:#00ff00;}
+80%{color:#ffff00;}
 100%{color:#ff0000;}
 }
 
-/* RGB BORDE */
 @keyframes rgbBorder{
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
 }
 
-/* METEORITOS (LIGERO) */
+/* METEORITOS */
 .meteor{
 position:fixed;
-top:-50px;
+top:-100px;
 width:2px;
-height:80px;
-background:linear-gradient(#fff,transparent);
-opacity:0.6;
+height:120px;
+background:linear-gradient(white, rgba(255,255,255,0));
+opacity:0.9;
+filter:blur(1px);
 transform:rotate(45deg);
-animation:fall linear infinite;
+animation:meteorFall linear infinite;
 }
 
-@keyframes fall{
+.meteor::before{
+content:"";
+position:absolute;
+top:0;
+left:-2px;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 10px white, 0 0 20px white;
+}
+
+@keyframes meteorFall{
 0%{transform:translate(0,0) rotate(45deg);opacity:0;}
 10%{opacity:1;}
-100%{transform:translate(200px,100vh) rotate(45deg);opacity:0;}
+100%{transform:translate(300px,120vh) rotate(45deg);opacity:0;}
 }
 
-/* CONTENEDOR */
-.container{
-max-width:280px;
-margin:auto;
-padding:5px;
+.header{text-align:center;padding:20px;}
+.header h1{
+animation:rgbText 8s infinite linear;
 }
 
-/* HEADER */
-.header{
-text-align:center;
-font-size:11px;
-padding:5px;
-animation:rgbText 8s linear infinite;
-}
-
-/* IMAGEN */
+.creador{text-align:center;margin:20px;}
 .creador img{
-width:65%;
-max-width:140px;
-display:block;
-margin:5px auto;
-border-radius:7px;
-padding:2px;
-background:linear-gradient(45deg,red,magenta,cyan,lime,yellow);
-background-size:300% 300%;
-animation:rgbBorder 10s linear infinite;
+width:90%;
+max-width:400px;
+border-radius:15px;
+padding:4px;
+background:linear-gradient(45deg, red, magenta, cyan, lime, yellow);
+background-size:400% 400%;
+animation:rgbBorder 6s linear infinite;
 }
 
-/* CARD */
+.creador p{
+animation:rgbText 8s infinite linear;
+font-weight:bold;
+}
+
+.search{
+padding:12px;
+width:90%;
+margin:10px auto;
+display:block;
+border-radius:10px;
+border:none;
+background:#111;
+color:#fff;
+font-size:16px;
+}
+
+.container{padding:15px;}
+
 .card{
 background:#111;
-padding:6px;
-border-radius:7px;
-margin-bottom:6px;
+padding:15px;
+border-radius:15px;
+margin-bottom:15px;
+box-shadow:0 0 15px #ff00ff;
+transition:0.3s;
+}
+.card:hover{
+transform:scale(1.03);
+box-shadow:0 0 35px #00ffff;
 }
 
-/* IMG */
-.img-box{
-padding:2px;
-border-radius:6px;
-background:linear-gradient(45deg,red,magenta,cyan,lime,yellow);
-background-size:300% 300%;
-animation:rgbBorder 10s linear infinite;
+.img-rgb{
+padding:4px;
+border-radius:10px;
+background:linear-gradient(45deg, red, magenta, cyan, lime, yellow);
+background-size:400% 400%;
+animation:rgbBorder 6s linear infinite;
+margin-bottom:10px;
 }
-
-.img-box img{
+.img-rgb img{
 width:100%;
-border-radius:5px;
+border-radius:8px;
 }
 
-/* TEXTO */
-.nombre{
-font-size:9px;
+.nombre-rgb{
+animation:rgbText 8s infinite linear;
 text-align:center;
-margin:3px 0;
-animation:rgbText 10s linear infinite;
 }
 
 .fecha{
-font-size:8px;
 text-align:center;
-opacity:0.6;
+font-size:14px;
+animation:rgbText 10s infinite linear;
 }
 
-/* BOTON */
 .btn{
-margin-top:4px;
-padding:5px;
+padding:12px;
+margin-top:10px;
 text-align:center;
-font-size:9px;
-border-radius:6px;
+border-radius:10px;
 cursor:pointer;
-background:linear-gradient(45deg,red,magenta,cyan,lime,yellow);
-background-size:300% 300%;
-animation:rgbBorder 10s linear infinite;
+font-weight:bold;
+background:linear-gradient(45deg, red, magenta, cyan, lime, yellow);
+background-size:400% 400%;
+animation:rgbBorder 6s linear infinite;
 color:#000;
 }
 </style>
@@ -137,68 +151,91 @@ color:#000;
 
 <body>
 
-<!-- METEORITOS -->
-<script>
-for(let i=0;i<4;i++){
-let m=document.createElement("div");
-m.className="meteor";
-m.style.left=Math.random()*100+"%";
-m.style.animationDuration=(4+Math.random()*4)+"s";
-m.style.animationDelay=(Math.random()*5)+"s";
-document.body.appendChild(m);
-}
-</script>
-
-<div class="app">
-
-<div class="header">ALBERT DESCARGAS</div>
+<div class="header">
+<h1>ZONA DE DESCARGA DE ALBERT OFICIAL</h1>
+</div>
 
 <div class="creador">
 <img src="https://i.imgur.com/kKZMQZU.png">
+<p>ALBERT OFICIAL CREADOR</p>
 </div>
 
+<input class="search" placeholder="Buscar..." oninput="buscar(this.value)">
 <div class="container" id="lista"></div>
-
-</div>
 
 <script>
 
-const archivos=[
+/* METEORITOS DINÁMICOS */
+function crearMeteoros(){
+for(let i=0;i<8;i++){
+const m = document.createElement("div");
+m.className = "meteor";
+m.style.left = Math.random()*100 + "%";
+m.style.animationDuration = (3 + Math.random()*4) + "s";
+m.style.animationDelay = (Math.random()*5) + "s";
+document.body.appendChild(m);
+}
+}
+crearMeteoros();
+
+/* ARCHIVOS (SIN LOCALSTORAGE, SIN BUG) */
+const archivos = [
 {
-nombre:"HOLOGRAMA + TELEPOR",
-link:"https://www.mediafire.com/",
+id:"file1",
+nombre:"HOLOGRAMA PERSONAJES + TELEPOR INFINITO",
+link:"https://www.mediafire.com/file/rsczfussmk8hm1s/HOLOGRAMA_PERSONAJE_%252B_TELEPOR_INFINITO_%25F0%259F%2591%258C%25F0%259F%25A5%25B5.7z/file",
 imagen:"https://i.imgur.com/fxe6U0p.png",
-fecha:"03/04"
+fecha:"03/04/2026"
 },
 {
-nombre:"AIMBOT + HOLOGRAMA",
-link:"https://www.mediafire.com/",
+id:"file2",
+nombre:"HOLOGRAMA 90% PERSO + AIMBOT 80% CABEZ",
+link:"https://www.mediafire.com/file/63662esowdkfr5e/AIMBOT_80%2525_CABEZA_%252B_HOLOGRAMA_PERSONAJES_90%2525_FF_NORMAL_By_ALBERT_OFICIAL.7z/file",
 imagen:"https://i.imgur.com/WYEUKbK.png",
-fecha:"04/04"
+fecha:"04/04/2026"
 },
 {
-nombre:"HOLOGRAMA AZUL",
-link:"https://www.mediafire.com/",
+id:"file3",
+nombre:"HOLOGRAMA AURORA AZUL",
+link:"https://www.mediafire.com/file/j28cfvj29h1yd4o/HOLOGRAMA_AZUL_AURORA_FF_MAX_By_ALBERT_OFICIAL_CREADOR.7z/file",
 imagen:"https://i.imgur.com/cSPurlN.png",
-fecha:"05/04"
+fecha:"05/04/2026"
 }
 ];
 
-function render(){
+/* RENDER */
+function render(lista = archivos){
+const contenedor = document.getElementById("lista");
 let html="";
-for(let i=0;i<archivos.length;i++){
-html+=
-'<div class="card">'+
-'<div class="img-box"><img src="'+archivos[i].imagen+'"></div>'+
-'<div class="nombre">'+archivos[i].nombre+'</div>'+
-'<div class="fecha">'+archivos[i].fecha+'</div>'+
-'<div class="btn" onclick="window.open(\''+archivos[i].link+'\')">Descargar</div>'+
-'</div>';
+
+lista.forEach((a)=>{
+html+=`
+<div class="card">
+<div class="img-rgb"><img src="${a.imagen}" loading="lazy"></div>
+<h2 class="nombre-rgb">${a.nombre}</h2>
+<div class="fecha">📅 ${a.fecha}</div>
+<div class="btn" onclick="descargar('${a.link}')">DESCARGAR</div>
+</div>`;
+});
+
+contenedor.innerHTML = html;
 }
-document.getElementById("lista").innerHTML=html;
+render();
+
+/* DESCARGAR */
+function descargar(link){
+setTimeout(()=>{
+window.open(link, "_blank");
+},200);
 }
 
-render();
+/* BUSCAR */
+function buscar(text){
+const filtrados = archivos.filter(a =>
+a.nombre.toLowerCase().includes(text.toLowerCase())
+);
+render(filtrados);
+}
 
 </script>
 
