@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZONA DE DESCARGA DE ALBERT OFICIAL</title>
+<title>ALBERT DESCARGAS</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-font-family:Arial;
 background:#000;
 color:#fff;
-overflow-x:hidden;
+font-family:Arial;
 }
 
 /* RGB SUAVE */
@@ -31,105 +30,85 @@ overflow-x:hidden;
 /* HEADER */
 .header{
 text-align:center;
-padding:8px;
-font-size:13px;
+padding:6px;
+font-size:12px;
 font-weight:bold;
 animation:rgbText 6s linear infinite;
 }
 
-/* CREADOR */
+/* IMAGEN */
 .creador{
 text-align:center;
 margin:6px;
 }
 
 .creador img{
-width:70%;
-max-width:200px;
+width:65%;
+max-width:180px;
 border-radius:8px;
 padding:2px;
 background:linear-gradient(45deg,#00ffcc,#00aaff,#00ffcc);
 background-size:300% 300%;
-animation:rgbBorder 8s linear infinite;
-}
-
-.creador p{
-font-size:10px;
-margin-top:4px;
-animation:rgbText 6s linear infinite;
-}
-
-/* BUSCADOR */
-.search{
-padding:6px;
-width:90%;
-margin:6px auto;
-display:block;
-border-radius:6px;
-border:none;
-background:#111;
-color:#fff;
-font-size:11px;
+animation:rgbBorder 10s linear infinite;
 }
 
 /* CONTENEDOR */
 .container{
-padding:6px;
-max-width:350px;
+max-width:320px;
 margin:auto;
+padding:6px;
 }
 
 /* CARD */
 .card{
 background:#111;
-padding:8px;
+padding:6px;
 border-radius:8px;
-margin-bottom:8px;
-box-shadow:0 0 5px rgba(0,255,200,0.3);
+margin-bottom:6px;
+box-shadow:0 0 4px rgba(0,255,200,0.3);
 }
 
-/* IMAGEN */
-.img-rgb{
+/* IMAGEN CARD */
+.img{
 padding:2px;
 border-radius:6px;
 background:linear-gradient(45deg,#00ffcc,#00aaff,#00ffcc);
 background-size:300% 300%;
-animation:rgbBorder 8s linear infinite;
-margin-bottom:5px;
+animation:rgbBorder 10s linear infinite;
 }
 
-.img-rgb img{
+.img img{
 width:100%;
 border-radius:5px;
 }
 
 /* TEXTO */
-.nombre-rgb{
-font-size:11px;
+.nombre{
+font-size:10px;
 text-align:center;
-margin-bottom:3px;
+margin:3px 0;
 animation:rgbText 6s linear infinite;
 }
 
 .fecha{
+font-size:8px;
 text-align:center;
-font-size:9px;
 opacity:0.7;
-margin-bottom:4px;
 }
 
 /* BOTON */
 .btn{
-padding:6px;
+margin-top:4px;
+padding:5px;
 text-align:center;
 border-radius:6px;
-cursor:pointer;
+font-size:9px;
 font-weight:bold;
-font-size:10px;
 background:linear-gradient(45deg,#00ffcc,#00aaff,#00ffcc);
 background-size:300% 300%;
-animation:rgbBorder 8s linear infinite;
+animation:rgbBorder 10s linear infinite;
 color:#000;
+cursor:pointer;
 }
 </style>
 </head>
@@ -137,61 +116,53 @@ color:#000;
 <body>
 
 <div class="header">
-ZONA DE DESCARGAS DE ALBERT OFICIAL
+ALBERT DESCARGAS
 </div>
 
 <div class="creador">
 <img src="https://i.imgur.com/kKZMQZU.png">
-<p>ALBERT OFICIAL CREADOR</p>
 </div>
 
-<input class="search" placeholder="Buscar..." oninput="buscar(this.value)">
 <div class="container" id="lista"></div>
 
 <script>
 
 const archivos = [
 {
-nombre:"HOLOGRAMA PERSONAJES + TELEPOR INFINITO",
+nombre:"HOLOGRAMA PERSONAJES + TELEPOR",
 link:"https://www.mediafire.com/file/rsczfussmk8hm1s/HOLOGRAMA_PERSONAJE_%252B_TELEPOR_INFINITO_%25F0%259F%2591%258C%25F0%259F%25A5%25B5.7z/file",
 imagen:"https://i.imgur.com/fxe6U0p.png",
 fecha:"03/04/2026"
 },
 {
-nombre:"HOLOGRAMA 90% PERSO + AIMBOT 80% CABEZ",
+nombre:"HOLOGRAMA + AIMBOT",
 link:"https://www.mediafire.com/file/63662esowdkfr5e/AIMBOT_80%2525_CABEZA_%252B_HOLOGRAMA_PERSONAJES_90%2525_FF_NORMAL_By_ALBERT_OFICIAL.7z/file",
 imagen:"https://i.imgur.com/WYEUKbK.png",
 fecha:"04/04/2026"
 },
 {
-nombre:"HOLOGRAMA AURORA AZUL",
+nombre:"HOLOGRAMA AZUL",
 link:"https://www.mediafire.com/file/j28cfvj29h1yd4o/HOLOGRAMA_AZUL_AURORA_FF_MAX_By_ALBERT_OFICIAL_CREADOR.7z/file",
 imagen:"https://i.imgur.com/cSPurlN.png",
 fecha:"05/04/2026"
 }
 ];
 
-function render(lista = archivos){
+function render(){
 let html="";
-lista.forEach((a)=>{
-html+=`
-<div class="card">
-<div class="img-rgb"><img src="${a.imagen}"></div>
-<div class="nombre-rgb">${a.nombre}</div>
-<div class="fecha">📅 ${a.fecha}</div>
-<div class="btn" onclick="window.open('${a.link}')">DESCARGAR</div>
-</div>`;
-});
+for(let i=0;i<archivos.length;i++){
+html+=
+'<div class="card">'+
+'<div class="img"><img src="'+archivos[i].imagen+'"></div>'+
+'<div class="nombre">'+archivos[i].nombre+'</div>'+
+'<div class="fecha">'+archivos[i].fecha+'</div>'+
+'<div class="btn" onclick="window.open(\''+archivos[i].link+'\')">DESCARGAR</div>'+
+'</div>';
+}
 document.getElementById("lista").innerHTML = html;
 }
-render();
 
-function buscar(text){
-const filtrados = archivos.filter(a =>
-a.nombre.toLowerCase().includes(text.toLowerCase())
-);
-render(filtrados);
-}
+render();
 
 </script>
 
