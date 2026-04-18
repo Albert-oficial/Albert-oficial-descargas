@@ -12,19 +12,47 @@ body{
 background:#000;
 color:#fff;
 font-family:Arial;
+overflow-x:hidden;
 }
 
-/* ESCALA AJUSTADA (ANTES 0.65) */
+/* ESCALA (NO TOCAR) */
 .app{
 transform:scale(1.1);
 transform-origin:top center;
 }
 
-/* RGB SUAVE */
-@keyframes rgb{
-0%{color:#00ffcc;}
-50%{color:#00aaff;}
-100%{color:#00ffcc;}
+/* RGB TEXTO */
+@keyframes rgbText{
+0%{color:#ff0000;}
+25%{color:#ff00ff;}
+50%{color:#00ffff;}
+75%{color:#00ff00;}
+100%{color:#ff0000;}
+}
+
+/* RGB BORDE */
+@keyframes rgbBorder{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* METEORITOS (LIGERO) */
+.meteor{
+position:fixed;
+top:-50px;
+width:2px;
+height:80px;
+background:linear-gradient(#fff,transparent);
+opacity:0.6;
+transform:rotate(45deg);
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translate(0,0) rotate(45deg);opacity:0;}
+10%{opacity:1;}
+100%{transform:translate(200px,100vh) rotate(45deg);opacity:0;}
 }
 
 /* CONTENEDOR */
@@ -39,7 +67,7 @@ padding:5px;
 text-align:center;
 font-size:11px;
 padding:5px;
-animation:rgb 8s linear infinite;
+animation:rgbText 8s linear infinite;
 }
 
 /* IMAGEN */
@@ -49,6 +77,10 @@ max-width:140px;
 display:block;
 margin:5px auto;
 border-radius:7px;
+padding:2px;
+background:linear-gradient(45deg,red,magenta,cyan,lime,yellow);
+background-size:300% 300%;
+animation:rgbBorder 10s linear infinite;
 }
 
 /* CARD */
@@ -60,7 +92,15 @@ margin-bottom:6px;
 }
 
 /* IMG */
-.card img{
+.img-box{
+padding:2px;
+border-radius:6px;
+background:linear-gradient(45deg,red,magenta,cyan,lime,yellow);
+background-size:300% 300%;
+animation:rgbBorder 10s linear infinite;
+}
+
+.img-box img{
 width:100%;
 border-radius:5px;
 }
@@ -70,6 +110,7 @@ border-radius:5px;
 font-size:9px;
 text-align:center;
 margin:3px 0;
+animation:rgbText 10s linear infinite;
 }
 
 .fecha{
@@ -84,15 +125,29 @@ margin-top:4px;
 padding:5px;
 text-align:center;
 font-size:9px;
-background:#00ffaa;
-color:#000;
 border-radius:6px;
 cursor:pointer;
+background:linear-gradient(45deg,red,magenta,cyan,lime,yellow);
+background-size:300% 300%;
+animation:rgbBorder 10s linear infinite;
+color:#000;
 }
 </style>
 </head>
 
 <body>
+
+<!-- METEORITOS -->
+<script>
+for(let i=0;i<4;i++){
+let m=document.createElement("div");
+m.className="meteor";
+m.style.left=Math.random()*100+"%";
+m.style.animationDuration=(4+Math.random()*4)+"s";
+m.style.animationDelay=(Math.random()*5)+"s";
+document.body.appendChild(m);
+}
+</script>
 
 <div class="app">
 
@@ -134,7 +189,7 @@ let html="";
 for(let i=0;i<archivos.length;i++){
 html+=
 '<div class="card">'+
-'<img src="'+archivos[i].imagen+'">'+
+'<div class="img-box"><img src="'+archivos[i].imagen+'"></div>'+
 '<div class="nombre">'+archivos[i].nombre+'</div>'+
 '<div class="fecha">'+archivos[i].fecha+'</div>'+
 '<div class="btn" onclick="window.open(\''+archivos[i].link+'\')">Descargar</div>'+
